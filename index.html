@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+	
+	<link rel="stylesheet" href="">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+
+</head>
+<body>
+	<div>
+		<h3>Attribute Based Directive</h3>
+		Enter a Character:<input type="text" alphabet>
+	</div>	
+
+	<script type="text/javascript">
+		var myApp = angular.module('myApp', []);
+		myApp.directive('alphabet', function(){
+			return{
+				restrict: 'A',
+				link: function(scope, elem,attr){
+					elem.bind('keyup', function(e){
+						if(/^[a-zA-Z]+$/.test(e.currentTarget.value)){
+							e.currentTarget.style.backgroundColor = 'green';
+						}else{
+							e.currentTarget.style.backgroundColor = 'red';
+						}
+					})
+				} 
+			}
+		});
+	</script>
+</body>
+</html>
