@@ -12,6 +12,15 @@
 		Enter a Character:<input type="text" alphabet>
 	</div>	
 
+	<input type="password" alphabet>
+	
+	<div>
+		<h3>Class Custom Directive</h3>
+		Enter a Number:<input type="password" class="numeric">
+	</div>	
+
+	
+
 	<script type="text/javascript">
 		var myApp = angular.module('myApp', []);
 		myApp.directive('alphabet', function(){
@@ -28,6 +37,60 @@
 				} 
 			}
 		});
+
+		myApp.directive('numeric', function(){
+			return{
+				restrict: 'C',
+				link: function(scope,elem,attr){
+					elem.bind('keyup', function(e){
+						if(/^[0-9]+$/.test(e.currentTarget.value)){
+							e.currentTarget.style.backgroundColor = "green";
+						}else{
+							e.currentTarget.style.backgroundColor = "red";
+						}
+					})
+				}
+			}
+		});
+
+
+		myApp.directive('dropDown', function(){
+			return{
+				restrict: "E",
+				scope: {
+					object: '='
+				},
+				template: '<select style="width:200px;"><option ng-repeat="i in data">{{i}}</option>',
+				controller: function($scope){
+					$scope.data = $scope.object;
+					console.log($scope);
+					console.log($scope.object);
+					console.log("TEST!!!");
+				}
+			}
+		})
+
 	</script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
